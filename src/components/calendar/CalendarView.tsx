@@ -53,9 +53,7 @@ function Calendar({ today }: { today: DateKey }) {
   const [selected, setSelected] = useState<DateKey>(today);
 
   const days = useMemo(() => monthGrid(month), [month]);
-  const from = days[0]!.key;
-  const to = days[days.length - 1]!.key;
-  const query = useScheduledProblems(from, to);
+  const query = useScheduledProblems();
   const itemsByDay = useMemo(() => groupByDay(query.data ?? EMPTY), [query.data]);
 
   const goToMonth = (next: MonthKey) => {

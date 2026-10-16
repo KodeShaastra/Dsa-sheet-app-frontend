@@ -98,17 +98,6 @@ export interface ScheduledProblem {
   problem: { id: string; title: string; difficulty: Difficulty };
 }
 
-/** Every scheduled problem's date: a problem sits on one date at a time. */
-export interface ProblemDate {
-  problemId: string;
-  scheduledFor: string;
-  status: ScheduleStatus;
-}
-
-export interface ProblemDatesResponse {
-  problemDates: ProblemDate[];
-}
-
 export interface ScheduledProblemsResponse {
   scheduledProblems: ScheduledProblem[];
 }

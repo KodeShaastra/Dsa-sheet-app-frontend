@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 /** "This week": scheduled, done, missed (always the current week, whatever month is shown). */
 export function WeekSummary({ today }: { today: DateKey }) {
   const { from, to } = weekRange(today);
-  const { data } = useScheduledProblems(from, to);
+  const all = useScheduledProblems().data;
+  const data = all?.filter((item) => item.scheduledFor >= from && item.scheduledFor <= to);
 
   const stats = data && [
     { label: "Scheduled", value: data.length, className: "text-foreground" },
