@@ -1,6 +1,7 @@
-import { FileText, PlayCircle, SquareCode } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { FileText, PlayCircle, SquareCode, type LucideIcon } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import type { Problem } from "@/types/api";
 
 function practiceLabel(url: string) {
@@ -10,35 +11,70 @@ function practiceLabel(url: string) {
   return "Practice";
 }
 
-/** Video / practice / article icon links. Links that are null are not shown. */
+interface Slot {
+  href: string | null;
+  label: string;
+  missing: string;
+  Icon: LucideIcon;
+}
+
+/**
+ * Video / practice / article icons, always in that order so every row lines up.
+ * A missing link shows a faded icon that can't be clicked, with a "No … yet" tooltip.
+ */
 export function ResourceLinks({ problem }: { problem: Problem }) {
-  const links = [
-    problem.youtubeUrl && { href: problem.youtubeUrl, label: "Watch the video", Icon: PlayCircle },
-    problem.practiceUrl && {
+  const slots: Slot[] = [
+    {
+      href: problem.youtubeUrl,
+      label: "Watch the video",
+      missing: "No video yet",
+      Icon: PlayCircle,
+    },
+    {
       href: problem.practiceUrl,
-      label: practiceLabel(problem.practiceUrl),
+      label: problem.practiceUrl ? practiceLabel(problem.practiceUrl) : "Practice",
+      missing: "No practice link yet",
       Icon: SquareCode,
     },
-    problem.articleUrl && { href: problem.articleUrl, label: "Read the article", Icon: FileText },
-  ].filter((link) => !!link);
+    {
+      href: problem.articleUrl,
+      label: "Read the article",
+      missing: "No article yet",
+      Icon: FileText,
+    },
+  ];
 
   return (
     <div className="flex shrink-0 items-center">
-      {links.map(({ href, label, Icon }) => (
-        <Tooltip key={label}>
+      {slots.map(({ href, label, missing, Icon }) => (
+        <Tooltip key={missing}>
           <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon-sm" asChild>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${label}: ${problem.title} (opens in a new tab)`}
+            {href ? (
+              <Button variant="ghost" size="icon-sm" asChild>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${label}: ${problem.title} (opens in a new tab)`}
+                >
+                  <Icon />
+                </a>
+              </Button>
+            ) : (
+              // Not a button and not in the Tab order (nothing to click); screen readers read the label.
+              <span
+                role="img"
+                aria-label={`${missing} for ${problem.title}`}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon-sm" }),
+                  "cursor-default text-faint-foreground opacity-50 hover:bg-transparent hover:text-faint-foreground",
+                )}
               >
                 <Icon />
-              </a>
-            </Button>
+              </span>
+            )}
           </TooltipTrigger>
-          <TooltipContent>{label}</TooltipContent>
+          <TooltipContent>{href ? label : missing}</TooltipContent>
         </Tooltip>
       ))}
     </div>
