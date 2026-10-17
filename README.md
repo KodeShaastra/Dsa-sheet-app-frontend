@@ -168,6 +168,8 @@ flowchart LR
 Build with `npm run build` (no `BACKEND_URL`), run with `npm start`. Nginx sends `/api/*` to the backend
 and everything else to this app, so the browser still sees one site.
 
+Step-by-step guide and scripts: [`deploy/DEPLOY.md` in the backend repo](https://github.com/KodeShaastra/Dsa-sheet-app-backend/blob/main/deploy/DEPLOY.md).
+
 ## More
 
 - **`CLAUDE.md`**: the full rules for working on this code (API contract, pages, data rules, definition of done).
