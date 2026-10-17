@@ -17,14 +17,14 @@ flowchart LR
 
 ## What it does
 
-| Page                       | What the user gets                                                                                                                  |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Log in / Sign up**       | Simple forms with clear errors. A "Fill in" button for the demo account.                                                            |
-| **Sheet** (`/sheet`)       | Progress overall and per difficulty, chapters as accordions, tick problems (saved instantly), filter by difficulty, hide solved.    |
-|                            | Opens at the first unsolved problem ("Up next"), so you carry on where you left off. Practice, video and article links per problem. |
-| **Calendar** (`/calendar`) | Month grid (Monday first), "This week" summary, a day panel. Add problems to a day, mark Done / Skip, move, delete (with Undo).     |
-|                            | Missed days are shown in red with "Move to today". Marking Done also ticks the problem on the sheet.                                |
-| **Everywhere**             | Light and dark mode, works on phones (375px wide), stays logged in for 7 days.                                                      |
+| Page                       | What the user gets                                                                                                                      |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Log in / Sign up**       | Simple forms with clear errors. A "Fill in" button for the demo account.                                                                |
+| **Sheet** (`/sheet`)       | Progress overall and per difficulty, chapters as accordions, tick problems (saved instantly), filter by difficulty, hide solved.        |
+|                            | Opens at the first unsolved problem ("In progress"), so you carry on where you left off. Practice, video and article links per problem. |
+| **Calendar** (`/calendar`) | Month grid (Monday first), "This week" summary, a day panel. Add problems to a day, mark Done / Skip, move, delete (with Undo).         |
+|                            | Missed days are shown in red with "Move to today". Marking Done also ticks the problem on the sheet.                                    |
+| **Everywhere**             | Light and dark mode, works on phones (375px wide), stays logged in for 7 days.                                                          |
 
 Calendar rules (the backend enforces them too):
 

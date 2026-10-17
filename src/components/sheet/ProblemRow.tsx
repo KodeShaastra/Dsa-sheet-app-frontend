@@ -35,7 +35,7 @@ export function ProblemRow({ problem, upNext }: { problem: ProblemView; upNext: 
         )}
       >
         {problem.title}
-        {upNext && <span className="ml-2 text-xs font-medium text-primary">Up next</span>}
+        {upNext && <span className="ml-2 text-xs font-medium text-primary">In progress</span>}
       </label>
       {/* Label on wider screens, dot on phones: difficulty is always visible. */}
       <DifficultyLabel difficulty={problem.difficulty} className="hidden w-16 sm:inline" />
